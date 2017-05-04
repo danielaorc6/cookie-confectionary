@@ -52,7 +52,7 @@
 
   <div class="row">
     <div class="col-md-6 button">
-      <div class="count" onclick="cookieCount()">Count</div>
+      <div class="count" onclick="cookieCount(true)">Count</div>
     </div>
     <div class="col-md-6 button">
       <div class="count" onclick="reset()">Reset</div>
@@ -77,6 +77,7 @@
       s++;
       s = s+"";
       Cookies.set("sugarclick", s);
+      cookieCount();
     };
 
 //------------------ CHOCOLATE --------------------------
@@ -89,6 +90,8 @@
       c++;
       c = c+"";
       Cookies.set("chocolateclick", c);
+
+      cookieCount();
     }
 
 //------------------ LEMON -------------------------------
@@ -103,24 +106,38 @@
       l++;
       l = l+"";
       Cookies.set("lemonclick", l);
+
+      cookieCount();
     }
 
 //------------------ COUNT -------------------------------
 
 //Number() turns strings into numbers to allow adding
-function cookieCount() {
-  var totalcookies = Number(s) + Number(c) + Number(l);
-  alert("You've eaten " + totalcookies + "!!!");
-}
+
+function cookieCount(showTotal) {
+    var totalcookies = Number(s) + Number(c) + Number(l);
+
+    if(totalcookies > Number(10)) {
+      alert("You've eaten " + totalcookies + " cookies!!! You're eating too many!!!!");
+    }
+    else if (showTotal) {
+      alert("You've eaten " + totalcookies + " cookies!!!");
+    }
+};
 
 //------------------ RESET -------------------------------
 //set the value in the cookie to 0 and set each value of the click = 0
     function reset() {
       Cookies.set("sugarclick", 0);
+      Cookies.set("chocolateclick", 0);
+      Cookies.set("lemonclick", 0);
       s = 0;
       c = 0;
       l = 0;
+      totalcookies = 0;
     }
+
+
 
 
   </script>
